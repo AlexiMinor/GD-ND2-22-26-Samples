@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Data/">
     <Project Path="../SampleSolution.Data.Db/SampleSolution.Data.Db.csproj" Id="07a1e7d8-3a95-46b0-a506-6288611fbe98" />
+    <Project Path="SampleSolution.Data.DataAccess/SampleSolution.Data.DataAccess.csproj" Id="d0652e2d-a89d-4acb-b930-b8e7987dd86f" />
   </Folder>
   <Folder Name="/DB-samples/">
     <Project Path="ConsoleApp1/ConsoleProjectWithDb.csproj" />
@@ -8,10 +9,12 @@
   <Folder Name="/Services/">
     <Project Path="../SampleSolution.SampleServices/SampleSolution.SampleServices.csproj" Id="7626e4c9-b01b-4518-8fa1-ce60b1ec96f5" />
     <Project Path="../SampleSolution.Services.ArticleService/SampleSolution.Services.ArticleService.csproj" Id="5ac4ad12-385d-451e-b2ac-525af7bce59a" />
+    <Project Path="SampleSolution.UserService/SampleSolution.UserService.csproj" Id="6eb2e0cb-a124-47cd-8bba-6178c1233ce1" />
     <Project Path="SourceService/SampleSolution.Services.SourceService.csproj" Id="75af2b40-488c-4fa2-8b4f-5a333ea54ee1" />
   </Folder>
   <Project Path="../../WebSamples/WebApplication1/ItAcademy.Samples.Mvc.csproj" />
   <Project Path="SampleSolution.AppHost/SampleSolution.AppHost.csproj" Id="2101c0c9-6819-40f5-8e42-f0dc24625a42" />
   <Project Path="SampleSolution.Core/SampleSolution.Core.csproj" Id="f3f65420-19f0-4521-a449-933b8c23938d" />
+  <Project Path="SampleSolution.MVC.Identity/SampleSolution.MVC.Identity.csproj" />
   <Project Path="SampleSolution.ServiceDefaults/SampleSolution.ServiceDefaults.csproj" />
 </Solution>

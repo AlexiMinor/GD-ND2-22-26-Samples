@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\WebSamples\WebApplication1\ItAcademy.Samples.Mvc.csproj" />
+    <ProjectReference Include="..\SampleSolution.MVC.Identity\SampleSolution.MVC.Identity.csproj" />
   </ItemGroup>
 
 </Project>

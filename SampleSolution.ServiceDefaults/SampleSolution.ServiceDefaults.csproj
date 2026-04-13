@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SampleSolution.Services.ArticleService\SampleSolution.Services.ArticleService.csproj" />
+    <ProjectReference Include="..\SampleSolution.UserService\SampleSolution.UserService.csproj" />
     <ProjectReference Include="..\SourceService\SampleSolution.Services.SourceService.csproj" />
   </ItemGroup>
 

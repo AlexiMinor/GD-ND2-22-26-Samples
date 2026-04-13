@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,8 +8,11 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
+using SampleSolution.Data.DataAccess.Article.CommandHandlers;
+using SampleSolution.Data.DataAccess.Article.Commands;
 using SampleSolution.Services.ArticleService;
 using SampleSolution.Services.SourceService;
+using SampleSolution.UserService;
 using Serilog;
 
 namespace SampleSolution.ServiceDefaults;
@@ -54,9 +58,23 @@ public static class Extensions
             builder.Services.AddScoped<IArticleService, ArticleService>();
             return builder;
         }
-         public TBuilder RegisterSourceServices()
+        public TBuilder RegisterSourceServices()
         {
             builder.Services.AddScoped<ISourceService, SampleSolution.Services.SourceService.SourceService>();
+            return builder;
+        }
+        public TBuilder RegisterUserServices()
+        {
+            builder.Services.AddScoped<IUserService, UserService.UserService>();
+            builder.Services.AddScoped<IRoleService, RoleService>();
+            return builder;
+        }
+
+        public TBuilder RegisterCqs()
+        {
+            builder.Services.AddMediatR(cfg => {
+                cfg.RegisterServicesFromAssembly(typeof(InsertParsedArticlesCommand).Assembly);
+            });
             return builder;
         }
 
