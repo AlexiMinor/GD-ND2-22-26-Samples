@@ -56,6 +56,8 @@ public static class Extensions
         public TBuilder RegisterArticleServices()
         {
             builder.Services.AddScoped<IArticleService, ArticleService>();
+            builder.Services.AddScoped<IRssService, RssService>();
+            builder.Services.AddScoped<IWebScrapperService, WebScrapperService>();
             return builder;
         }
         public TBuilder RegisterSourceServices()
@@ -78,7 +80,7 @@ public static class Extensions
             return builder;
         }
 
-        public TBuilder CofigureLogger()
+        public TBuilder ConfigureLogger()
         {
             builder.Services.AddSerilog((services, lc) => lc
                 .ReadFrom.Configuration(builder.Configuration));

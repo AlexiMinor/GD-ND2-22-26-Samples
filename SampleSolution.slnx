@@ -12,7 +12,14 @@
     <Project Path="SampleSolution.UserService/SampleSolution.UserService.csproj" Id="6eb2e0cb-a124-47cd-8bba-6178c1233ce1" />
     <Project Path="SourceService/SampleSolution.Services.SourceService.csproj" Id="75af2b40-488c-4fa2-8b4f-5a333ea54ee1" />
   </Folder>
+  <Folder Name="/Tests/" />
+  <Folder Name="/Tests/Services/">
+    <Project Path="SampleSolution.Services.ArticleService.Tests/SampleSolution.Services.ArticleService.Tests.csproj" Id="3b8a0fea-7482-40bf-bfd4-7bf7efe74389" />
+    <Project Path="SampleSolution.Services.UserService.Tests/SampleSolution.Services.UserService.Tests.csproj" Id="e174817e-4530-4ad9-897d-1d8ce2ce0d4b" />
+  </Folder>
   <Project Path="../../WebSamples/WebApplication1/ItAcademy.Samples.Mvc.csproj" />
+  <Project Path="ItAcademy.Sample.MinimalApi/ItAcademy.Sample.MinimalApi.csproj" />
+  <Project Path="ItAcademy.Samples.WebAPI/ItAcademy.Samples.WebAPI.csproj" />
   <Project Path="SampleSolution.AppHost/SampleSolution.AppHost.csproj" Id="2101c0c9-6819-40f5-8e42-f0dc24625a42" />
   <Project Path="SampleSolution.Core/SampleSolution.Core.csproj" Id="f3f65420-19f0-4521-a449-933b8c23938d" />
   <Project Path="SampleSolution.MVC.Identity/SampleSolution.MVC.Identity.csproj" />

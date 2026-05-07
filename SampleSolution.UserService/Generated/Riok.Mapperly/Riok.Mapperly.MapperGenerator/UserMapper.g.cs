@@ -10,7 +10,7 @@ namespace SampleSolution.UserService
             var target = new global::SampleSolution.Data.DataAccess.User.Commands.InsertNewUserCommand()
             {
                 Name = dto.Name,
-                Email = dto.Email,
+                Email = dto.UserEmail,
                 PasswordHash = passwordHash,
                 Salt = salt,
                 RoleId = dto.RoleId,

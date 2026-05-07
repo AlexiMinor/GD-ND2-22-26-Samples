@@ -27,7 +27,6 @@ public class UserService(ILogger<UserService> logger, IMediator mediator) : IUse
 
     public async Task<bool> CheckUserExistsAndPasswordCorrectAsync(string email, string modelPassword, CancellationToken token)
     {
-
         var userDto = await mediator.Send(new GetUserSaltAndPasswordHashByEmailQuery() { Email = email }, token);
         if (userDto == null)
         {

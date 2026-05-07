@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\WebSamples\WebApplication1\ItAcademy.Samples.Mvc.csproj" />
+    <ProjectReference Include="..\ItAcademy.Sample.MinimalApi\ItAcademy.Sample.MinimalApi.csproj" />
+    <ProjectReference Include="..\ItAcademy.Samples.WebAPI\ItAcademy.Samples.WebAPI.csproj" />
     <ProjectReference Include="..\SampleSolution.MVC.Identity\SampleSolution.MVC.Identity.csproj" />
   </ItemGroup>
 

@@ -14,18 +14,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MediatR" Version="13.1.0" />
+		<PackageReference Include="MediatR" Version="14.1.0" />
 		<PackageReference Include="Riok.Mapperly" Version="4.3.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\SampleSolution.Data.Db\SampleSolution.Data.Db.csproj" />
 		<ProjectReference Include="..\SampleSolution.Core\SampleSolution.Core.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Article\Queries\" />
-		<Folder Include="Article\QueryHandlers\" />
 	</ItemGroup>
 
 </Project>

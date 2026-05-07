@@ -24,5 +24,15 @@ namespace SampleSolution.Data.DataAccess.User
             target.PasswordHash = userEntity.PasswordHash;
             return target;
         }
+
+        [global::System.CodeDom.Compiler.GeneratedCode("Riok.Mapperly", "4.3.1.0")]
+        public static partial global::SampleSolution.Core.DTOs.UserLoginDto UserEntityToUserLoginDto(global::SampleSolution.Data.Db.Entities.User userEntity)
+        {
+            var target = new global::SampleSolution.Core.DTOs.UserLoginDto();
+            target.Name = userEntity.Name;
+            target.Email = userEntity.Email;
+            target.RoleName = userEntity.Role.Name;
+            return target;
+        }
     }
 }

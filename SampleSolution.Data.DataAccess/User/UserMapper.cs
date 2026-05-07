@@ -16,4 +16,8 @@ public static partial class UserMapper
     public static partial Db.Entities.User InsertUserCommandToUser(InsertNewUserCommand userCommand);
 
     public static partial UserCheckPasswordDto UserEntityToUserCheckPasswordDto(Db.Entities.User userEntity);
+
+    [MapProperty([nameof(Db.Entities.User.Role), nameof(Db.Entities.User.Role.Name)], 
+        nameof(UserLoginDto.RoleName))]
+    public static partial UserLoginDto UserEntityToUserLoginDto(Db.Entities.User userEntity);
 }

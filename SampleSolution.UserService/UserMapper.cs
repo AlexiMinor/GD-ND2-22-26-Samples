@@ -9,6 +9,6 @@ namespace SampleSolution.UserService;
     EnumMappingStrategy = EnumMappingStrategy.ByName)]
 public static partial  class UserMapper
 {
-
+    [MapProperty(nameof(RegisterUserDto.UserEmail), nameof(InsertNewUserCommand.Email))]
     public static partial InsertNewUserCommand RegisterUserDtoToInsertCommand(RegisterUserDto dto, string passwordHash, string salt);
 }

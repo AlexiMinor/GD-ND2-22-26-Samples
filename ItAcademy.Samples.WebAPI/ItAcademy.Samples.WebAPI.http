@@ -1,0 +1,6 @@
+@ItAcademy.Samples.WebAPI_HostAddress = http://localhost:5281
+
+GET {{ItAcademy.Samples.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

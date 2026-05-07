@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using SampleSolution.Data.DataAccess.User.Commands;
 using SampleSolution.Data.Db;
 
