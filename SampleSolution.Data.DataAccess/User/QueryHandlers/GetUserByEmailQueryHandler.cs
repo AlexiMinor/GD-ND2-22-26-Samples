@@ -6,11 +6,13 @@ using SampleSolution.Data.Db;
 
 namespace SampleSolution.Data.DataAccess.User.QueryHandlers;
 
-public class GetUserSaltAndPasswordHashByEmailQueryHandler(SampleDbContext dbContext) : IRequestHandler<GetUserSaltAndPasswordHashByEmailQuery, UserCheckPasswordDto?>
+public class GetUserByEmailQueryHandler(SampleDbContext dbContext) : IRequestHandler<GetUserByEmailQuery, UserDto?>
 {
-    public async Task<UserCheckPasswordDto?> Handle(GetUserSaltAndPasswordHashByEmailQuery request, CancellationToken cancellationToken)
+    public async Task<UserDto?> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
     {
-        return UserMapper.UserEntityToUserCheckPasswordDto(await dbContext.Users.AsNoTrackingWithIdentityResolution()
+        return UserMapper.UserEntityToUserDto(await dbContext.Users
+            .AsNoTrackingWithIdentityResolution()
+            .Include(u => u.Role)
             .SingleOrDefaultAsync(u => u.Email.Equals(request.Email), cancellationToken));
     }
 }

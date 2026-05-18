@@ -1,6 +1,8 @@
-using MediatR;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
@@ -8,10 +10,10 @@ using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
-using SampleSolution.Data.DataAccess.Article.CommandHandlers;
 using SampleSolution.Data.DataAccess.Article.Commands;
 using SampleSolution.Services.ArticleService;
 using SampleSolution.Services.SourceService;
+using SampleSolution.TokenService;
 using SampleSolution.UserService;
 using Serilog;
 
@@ -62,7 +64,12 @@ public static class Extensions
         }
         public TBuilder RegisterSourceServices()
         {
-            builder.Services.AddScoped<ISourceService, SampleSolution.Services.SourceService.SourceService>();
+            builder.Services.AddScoped<ISourceService, SourceService>();
+            return builder;
+        }
+        public TBuilder RegisterTokenServices()
+        {
+            builder.Services.AddScoped<ITokenService, TokenService.TokenService>();
             return builder;
         }
         public TBuilder RegisterUserServices()
@@ -80,6 +87,19 @@ public static class Extensions
             return builder;
         }
 
+        public TBuilder SetupHangfire()
+        {
+            builder.Services.AddHangfire(configuration => configuration
+                .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSqlServerStorage(builder.Configuration.GetConnectionString("HangfireConnection")));
+
+            // Add the processing server as IHostedService
+            builder.Services.AddHangfireServer();
+
+            return builder;
+        }
         public TBuilder ConfigureLogger()
         {
             builder.Services.AddSerilog((services, lc) => lc
@@ -137,6 +157,31 @@ public static class Extensions
             //       .UseAzureMonitor();
             //}
 
+            return builder;
+        }
+
+        public TBuilder AddJwtAuthentication()
+        {
+            builder.Services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).
+                AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
+                            System.Text.Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
+                    };
+                });
             return builder;
         }
 

@@ -66,6 +66,16 @@ public class UserService(ILogger<UserService> logger, IMediator mediator) : IUse
 
     }
 
+    public async Task<UserDto?> GetUserByEmailAsync(string username, CancellationToken cancellationToken)
+    {
+        return await mediator.Send(new GetUserByEmailQuery(username), cancellationToken);
+    }
+
+    public async Task<UserDto?> GetUserByRefreshTokenAsync(Guid modelRefreshToken, CancellationToken cancellationToken)
+    {
+       return await mediator.Send(new GetUserByRefreshTokenQuery(modelRefreshToken), cancellationToken);
+    }
+
     private string GetSalt()
     {
         return Guid.NewGuid().ToString("D");

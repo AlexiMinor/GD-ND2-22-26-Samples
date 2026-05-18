@@ -1,5 +1,6 @@
 using ItAcademy.Samples.WebAPI.Mappers;
 using ItAcademy.Samples.WebAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SampleSolution.Core.DTOs;
 using SampleSolution.Services.ArticleService;
@@ -12,6 +13,7 @@ namespace ItAcademy.Samples.WebAPI.Controllers;
 /// <param name="logger">The logger instance for logging information and errors.</param>
 /// <param name="articleService">The service instance for managing articles.</param>
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class ArticlesController(ILogger<ArticlesController> logger, IArticleService articleService)
     : ControllerBase

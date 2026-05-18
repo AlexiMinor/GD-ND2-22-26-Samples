@@ -13,5 +13,9 @@ namespace SampleSolution.UserService
             CancellationToken token);
 
         Task<ClaimsPrincipal?> GetLoginDataAsync(string email, CancellationToken token);
+
+        Task<UserDto?> GetUserByEmailAsync(string username, CancellationToken cancellationToken);
+
+        Task<UserDto?> GetUserByRefreshTokenAsync(Guid modelRefreshToken, CancellationToken cancellationToken);
     }
 }

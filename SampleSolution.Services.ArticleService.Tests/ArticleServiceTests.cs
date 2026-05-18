@@ -5,6 +5,7 @@ using SampleSolution.Data.DataAccess.Article.Commands;
 using SampleSolution.Data.DataAccess.Article.Queries;
 using SampleSolution.Data.DataAccess.Sources.Queries;
 using System.Collections.ObjectModel;
+using Microsoft.Extensions.Configuration;
 
 namespace SampleSolution.Services.ArticleService.Tests
 {
@@ -12,6 +13,7 @@ namespace SampleSolution.Services.ArticleService.Tests
     {
         private readonly IMediator _mediatorMock;
         private readonly IRssService _rssMock;
+        private readonly IConfiguration _configurationMock;
         private readonly IWebScrapperService _webScrapperMock;
         private readonly ArticleService _sut;
 
@@ -20,7 +22,8 @@ namespace SampleSolution.Services.ArticleService.Tests
             _mediatorMock = Substitute.For<IMediator>();
             _rssMock = Substitute.For<IRssService>();
             _webScrapperMock = Substitute.For<IWebScrapperService>();
-            _sut = new ArticleService(_mediatorMock, _rssMock, _webScrapperMock);
+            _configurationMock = Substitute.For<IConfiguration>();
+            _sut = new ArticleService(_mediatorMock, _rssMock, _webScrapperMock, _configurationMock);
         }
 
         [Fact]

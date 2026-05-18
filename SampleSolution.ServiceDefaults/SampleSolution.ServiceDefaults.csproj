@@ -9,9 +9,14 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.23" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.23" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.8.23" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.8" />
 
     <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="10.5.0" />
     <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" Version="10.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.15.3" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.15.3" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.15.2" />
@@ -23,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SampleSolution.Services.ArticleService\SampleSolution.Services.ArticleService.csproj" />
+    <ProjectReference Include="..\SampleSolution.TokenService\SampleSolution.TokenService.csproj" />
     <ProjectReference Include="..\SampleSolution.UserService\SampleSolution.UserService.csproj" />
     <ProjectReference Include="..\SourceService\SampleSolution.Services.SourceService.csproj" />
   </ItemGroup>

@@ -1,14 +1,14 @@
-
+using FluentValidation;
+using Hangfire;
+using ItAcademy.Samples.WebAPI.Infrastructure;
+using ItAcademy.Samples.WebAPI.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using Microsoft.OpenApi;
 using SampleSolution.Data.Db;
 using SampleSolution.ServiceDefaults;
 using System.Reflection;
 using System.Text.Json.Serialization;
-using FluentValidation;
-using ItAcademy.Samples.WebAPI.Infrastructure;
-using ItAcademy.Samples.WebAPI.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ItAcademy.Samples.WebAPI;
 
@@ -27,8 +27,12 @@ public class Program
         builder.RegisterArticleServices();
         builder.RegisterSourceServices();
         builder.RegisterUserServices();
+        builder.RegisterTokenServices();
         builder.ConfigureLogger();
         builder.RegisterCqs();
+        builder.SetupHangfire();
+
+        builder.AddJwtAuthentication();
 
         builder.Services.AddValidatorsFromAssemblyContaining<UpdateArticleModel>();
 
@@ -54,11 +58,28 @@ public class Program
         {
             var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             opt.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+            opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer",
+                BearerFormat = "JWT"
+            });
+
+            opt.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+            {
+                [new OpenApiSecuritySchemeReference("Bearer", document)] = []
+            });
         });
+
 
         var app = builder.Build();
 
         app.MapDefaultEndpoints();
+        app.UseHangfireDashboard();
 
         app.UseSwagger(opt =>
         {
@@ -66,8 +87,7 @@ public class Program
         });
         app.UseSwaggerUI(opt =>
         {
-            opt.DocumentTitle = "Good Article Aggregator API";
-            opt.HeadContent = "Good Article Aggregator API";
+            //opt.DocumentTitle = "Good Article Aggregator API";
             opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Good Article Aggregator API V1");
         });
 
@@ -81,6 +101,7 @@ public class Program
         
         app.UseHttpsRedirection();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
 
