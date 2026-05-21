@@ -6,13 +6,14 @@ using SampleSolution.Data.Db;
 
 namespace SampleSolution.Data.DataAccess.Article.QueryHandlers;
 
-public class GetExistedArticleUrlsQueryHandler(SampleDbContext dbContext) : IRequestHandler<GetExistedArticleUrlsQuery, ReadOnlyCollection<string>>
+public class GetExistedArticleUrlsQueryHandler(SampleDbContext dbContext) : IRequestHandler<GetExistedArticleUrlsQuery, HashSet<string>>
 {
-    public async Task<ReadOnlyCollection<string>> Handle(GetExistedArticleUrlsQuery request, CancellationToken cancellationToken)
+    public async Task<HashSet<string>> Handle(GetExistedArticleUrlsQuery request, CancellationToken cancellationToken)
     {
-        return (await dbContext.Articles.Select(article => article.OriginalUrl)
-                .ToArrayAsync(cancellationToken))
-            .AsReadOnly();
+        var uniqueUrls = await dbContext.Articles.Select(article => article.OriginalUrl)
+            .Distinct()
+            .ToArrayAsync(cancellationToken);
 
+        return [.. uniqueUrls];
     }
 }

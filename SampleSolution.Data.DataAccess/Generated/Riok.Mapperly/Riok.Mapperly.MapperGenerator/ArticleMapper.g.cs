@@ -18,6 +18,21 @@ namespace SampleSolution.Data.DataAccess.Article
         }
 
         [global::System.CodeDom.Compiler.GeneratedCode("Riok.Mapperly", "4.3.1.0")]
+        public static partial global::SampleSolution.Data.Db.Entities.Article RssArticleInfoDtoToArticle(global::SampleSolution.Core.DTOs.RssArticleInfoDto dto)
+        {
+            var target = new global::SampleSolution.Data.Db.Entities.Article();
+            target.Title = dto.Title;
+            target.ShortDescription = dto.ShortDescription;
+            if (dto.PublishedDate != null)
+            {
+                target.PublishedDate = dto.PublishedDate.Value;
+            }
+            target.OriginalUrl = dto.OriginalUrl;
+            target.SourceId = (int)dto.SourceId;
+            return target;
+        }
+
+        [global::System.CodeDom.Compiler.GeneratedCode("Riok.Mapperly", "4.3.1.0")]
         [return: global::System.Diagnostics.CodeAnalysis.NotNullIfNotNull(nameof(entity))]
         public static partial global::SampleSolution.Core.DTOs.ArticleDto? ArticleToArticleDto(global::SampleSolution.Data.Db.Entities.Article? entity)
         {
@@ -28,7 +43,10 @@ namespace SampleSolution.Data.DataAccess.Article
             target.Title = entity.Title;
             target.ShortDescription = entity.ShortDescription;
             target.OriginalUrl = entity.OriginalUrl;
-            target.Text = entity.Text;
+            if (entity.Text != null)
+            {
+                target.Text = entity.Text;
+            }
             target.PublishedDate = entity.PublishedDate;
             target.SourceId = entity.SourceId;
             return target;

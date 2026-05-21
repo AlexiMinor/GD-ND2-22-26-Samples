@@ -9,6 +9,7 @@ using SampleSolution.Data.Db;
 using SampleSolution.ServiceDefaults;
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace ItAcademy.Samples.WebAPI;
 
@@ -79,7 +80,12 @@ public class Program
         var app = builder.Build();
 
         app.MapDefaultEndpoints();
-        app.UseHangfireDashboard();
+        app.UseHangfireDashboard(options:new DashboardOptions()
+        {
+            //a
+            //HangfireFilter : AuthorizeFilter = new AuthorizeFilter(){ } //JWT token which is valid and admin only
+            //Authorization = [new AuthorizeFilter(){}] //JWT token which is valid and admin only 
+        });
 
         app.UseSwagger(opt =>
         {

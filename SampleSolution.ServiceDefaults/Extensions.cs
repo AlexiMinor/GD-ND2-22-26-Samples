@@ -60,6 +60,9 @@ public static class Extensions
             builder.Services.AddScoped<IArticleService, ArticleService>();
             builder.Services.AddScoped<IRssService, RssService>();
             builder.Services.AddScoped<IWebScrapperService, WebScrapperService>();
+            builder.Services.AddScoped<IArticleRateService, ArticleRateService>();
+            builder.Services.AddScoped<IArticleAggregatorService, ArticleAggregatorService>();
+
             return builder;
         }
         public TBuilder RegisterSourceServices()

@@ -15,6 +15,12 @@ public static partial class ArticleMapper
     //[MapValue(nameof(Db.Entities.Article.ArticleIdentifier), Use = nameof(GetNewIdentifier))]
     public static partial Db.Entities.Article ArticleDtoToArticle(ArticleDto dto);
 
+    [MapperIgnoreTarget(nameof(Db.Entities.Article.Rate))]
+    [MapperIgnoreTarget(nameof(Db.Entities.Article.Id))]
+    [MapperIgnoreTarget(nameof(Db.Entities.Article.Text))]
+    [MapperIgnoreTarget(nameof(Db.Entities.Article.Source))]
+    public static partial Db.Entities.Article RssArticleInfoDtoToArticle(RssArticleInfoDto dto);
+
     public static partial ArticleDto? ArticleToArticleDto(Db.Entities.Article? entity);
 
     private static Guid GetNewIdentifier() => Guid.NewGuid();

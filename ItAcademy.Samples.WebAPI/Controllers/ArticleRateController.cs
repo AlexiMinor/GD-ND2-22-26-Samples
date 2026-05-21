@@ -1,21 +1,17 @@
-﻿using Hangfire;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SampleSolution.Services.ArticleService;
 
 namespace ItAcademy.Samples.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AggregateArticlesController(IArticleService articleService) : ControllerBase
+    public class AggregateArticlesController(IArticleAggregatorService articleAggregatorService) : ControllerBase
     {
-        [HttpPost]
+        [HttpPatch]
         public async Task<IActionResult> Aggregate(CancellationToken cancellationToken)
         {
-            RecurringJob.AddOrUpdate(
-                "ArticleAggregation",
-                () => articleService.AggregateArticlesAsync(cancellationToken),
-                "0 1/2 * * *");
-            return NoContent();
+            var result = await articleAggregatorService.SwitchAggregatorAsync(cancellationToken);
+            return Ok(new { IsAggregationEnabled = result });
         }
     }
 }

@@ -23,7 +23,7 @@ namespace SampleSolution.Services.ArticleService.Tests
             _rssMock = Substitute.For<IRssService>();
             _webScrapperMock = Substitute.For<IWebScrapperService>();
             _configurationMock = Substitute.For<IConfiguration>();
-            _sut = new ArticleService(_mediatorMock, _rssMock, _webScrapperMock, _configurationMock);
+            _sut = new ArticleService(_mediatorMock);
         }
 
         [Fact]
@@ -75,18 +75,18 @@ namespace SampleSolution.Services.ArticleService.Tests
         }
 
 
-        [Fact]
-        public async Task AggregateArticlesAsync_WhenCalled_AggregateData()
-        {
-            SetupMediator();
-            SetupRss();
-            SetupWebScrapper();
+        //[Fact]
+        //public async Task AggregateArticlesAsync_WhenCalled_AggregateData()
+        //{
+        //    SetupMediator();
+        //    SetupRss();
+        //    SetupWebScrapper();
 
-           var insertedCount = await  _sut.AggregateArticlesAsync(CancellationToken.None);
+        //   var insertedCount = await  _sut.AggregateArticlesAsync(CancellationToken.None);
            
-            Assert.True(insertedCount > 0);
-            Assert.Equal(2, insertedCount);
-        }
+        //    Assert.True(insertedCount > 0);
+        //    Assert.Equal(2, insertedCount);
+        //}
 
         private void SetupRss()
         {

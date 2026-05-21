@@ -79,17 +79,17 @@ public class ArticlesController(ILogger<ArticlesController> logger, IArticleServ
     //    return NoContent();
     //}
 
-    [HttpPatch("{id}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    //[HttpPatch("{id}")]
+    //[ProducesResponseType(StatusCodes.Status204NoContent)]
+    //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+    //[ProducesResponseType(StatusCodes.Status404NotFound)]
+    //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
-    public async Task<IActionResult> UpdatePartially(long id, UpdateArticleModel updatedModel, CancellationToken cancellationToken)
-    {
-        await articleService.UpdateArticlePartiallyAsync(id, updatedModel.Title, updatedModel.Rate, cancellationToken);
-        return NoContent();
-    }
+    //public async Task<IActionResult> UpdatePartially(long id, UpdateArticleModel updatedModel, CancellationToken cancellationToken)
+    //{
+    //    await articleService.UpdateArticlePartiallyAsync(id, updatedModel.Title, updatedModel.Rate, cancellationToken);
+    //    return NoContent();
+    //}
 
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

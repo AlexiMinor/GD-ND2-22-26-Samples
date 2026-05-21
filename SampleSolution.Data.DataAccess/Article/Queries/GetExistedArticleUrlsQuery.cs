@@ -3,4 +3,4 @@ using MediatR;
 
 namespace SampleSolution.Data.DataAccess.Article.Queries;
 
-public record GetExistedArticleUrlsQuery : IRequest<ReadOnlyCollection<string>>;
+public record GetExistedArticleUrlsQuery : IRequest<HashSet<string>>;
