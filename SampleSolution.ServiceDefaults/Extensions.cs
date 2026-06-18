@@ -65,6 +65,23 @@ public static class Extensions
 
             return builder;
         }
+
+        public TBuilder AddCorsSetup()
+        {
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
+            return builder;
+       
+        }
+
         public TBuilder RegisterSourceServices()
         {
             builder.Services.AddScoped<ISourceService, SourceService>();

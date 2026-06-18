@@ -2,4 +2,4 @@
 
 namespace SampleSolution.Data.DataAccess.Article.Queries;
 
-public record GetArticlesCountQuery :  IRequest<int>;
+public record GetArticlesCountQuery(int? MinRate) :  IRequest<int>;

@@ -1,0 +1,16 @@
+@if (selectedArticle) {
+  <app-article-title-edit-form-component [article]="selectedArticle"></app-article-title-edit-form-component>
+}
+
+<div class="article-list">
+  @for (article of articles(); track article.id) {
+      <app-article-preview [article]="article" (selectedArticleEvent)="onSelectedArticle($event)"></app-article-preview>
+  }
+</div>
+
+<mat-paginator [length]="length()"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               aria-label="Select page"
+               (page)="handlePageEvent($event)">
+</mat-paginator>

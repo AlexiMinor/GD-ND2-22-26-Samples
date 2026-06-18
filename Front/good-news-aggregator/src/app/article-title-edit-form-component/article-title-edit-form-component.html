@@ -1,0 +1,6 @@
+ @if (article) {
+ <div>
+    <!-- <label for="title"> Title: {{article.title}}</label> -->
+    <input id="title" placeholder="title" [value]="article.title" (input)="article.title = $event.target.value" />
+  </div>
+}

@@ -1,0 +1,16 @@
+
+<!-- ID - {{ article.id }}-->
+ @if (article) {
+ <mat-card appearance="outlined">
+   <mat-card-header>
+     <mat-card-title>{{ article.title | uppercase }}</mat-card-title>
+     <mat-card-subtitle>{{ article.publishedDate | date }}</mat-card-subtitle>
+   </mat-card-header>
+   <mat-card-content [innerHTML]="article.shortDescription ?? '' | safeHtml">
+   </mat-card-content>
+   <mat-card-actions>
+     <button matButton (click)="editTitle()">Edit title</button>
+     <button matButton [routerLink]="['/articles', article.id]">Read More</button>
+   </mat-card-actions>
+ </mat-card>
+ }

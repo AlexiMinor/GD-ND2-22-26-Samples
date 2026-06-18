@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Front/good-news-aggregator/.github
+/Front/good-news-aggregator/.vscode

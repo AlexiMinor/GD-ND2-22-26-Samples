@@ -12,8 +12,8 @@ namespace ItAcademy.Samples.WebAPI.Controllers;
 /// </summary>
 /// <param name="logger">The logger instance for logging information and errors.</param>
 /// <param name="articleService">The service instance for managing articles.</param>
+//[Authorize]
 [ApiController]
-[Authorize]
 [Route("api/[controller]")]
 public class ArticlesController(ILogger<ArticlesController> logger, IArticleService articleService)
     : ControllerBase
@@ -61,10 +61,19 @@ public class ArticlesController(ILogger<ArticlesController> logger, IArticleServ
     [HttpGet]
     [ProducesResponseType<ArticleDto[]>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetByRateAndSource(decimal? minRate, int? sourceId, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetByPageAndRate([FromQuery]RatedArticlePaginationModel model, CancellationToken cancellationToken)
     {
-        var articles = await articleService.GetArticlesByRateAndSourceAsync(minRate, sourceId, cancellationToken);
+        var articles = await articleService.GetArticlesByRateAndPageAsync(model.MinRate, model.PageNumber, model.PageSize, cancellationToken);
         return Ok(articles);
+    }
+
+    [HttpGet("Count")]
+    [ProducesResponseType<ArticleDto[]>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> GetCount(int? minRate, CancellationToken cancellationToken)
+    {
+        var count = await articleService.GetArticlesCountAsync(minRate, cancellationToken);
+        return Ok(count);
     }
 
     //[HttpPut("{id}")]

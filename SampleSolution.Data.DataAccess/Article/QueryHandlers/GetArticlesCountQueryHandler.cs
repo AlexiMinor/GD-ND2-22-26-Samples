@@ -9,6 +9,10 @@ public class GetArticlesCountQueryHandler(SampleDbContext dbContext) : IRequestH
 {
     public async Task<int> Handle(GetArticlesCountQuery request, CancellationToken cancellationToken)
     {
+        if (request.MinRate.HasValue)
+        {
+            return await dbContext.Articles.CountAsync(a => a.Rate >= request.MinRate.Value, cancellationToken);
+        }
         return await dbContext.Articles.CountAsync(cancellationToken);
     }
 }

@@ -1,0 +1,6 @@
+services:
+  itacademy.samples.webapi:
+    image: ${DOCKER_REGISTRY-}itacademysampleswebapi
+    build:
+      context: .
+      dockerfile: ItAcademy.Samples.WebAPI/Dockerfile

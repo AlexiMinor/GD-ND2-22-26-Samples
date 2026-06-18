@@ -32,7 +32,7 @@ public class Program
         builder.ConfigureLogger();
         builder.RegisterCqs();
         builder.SetupHangfire();
-
+        builder.AddCorsSetup();
         builder.AddJwtAuthentication();
 
         builder.Services.AddValidatorsFromAssemblyContaining<UpdateArticleModel>();
@@ -106,6 +106,7 @@ public class Program
         app.UseExceptionHandler();
         
         app.UseHttpsRedirection();
+        app.UseCors();
 
         app.UseAuthentication();
         app.UseAuthorization();
